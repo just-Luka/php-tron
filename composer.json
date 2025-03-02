@@ -1,0 +1,34 @@
+{
+    "name": "just-luka/php-tron",
+    "version": "1.0.0",
+    "description": "PHP package for interacting with TRX network",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Trx\\": "src/Trx/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Trx\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Luka T.",
+            "email": "info.tsiklauri@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.2",
+        "ext-curl": "*",
+        "ext-gmp": "*",
+        "kornrunner/secp256k1": "dev-main",
+        "simplito/elliptic-php": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*"
+    }
+}
