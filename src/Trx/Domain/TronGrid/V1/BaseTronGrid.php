@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace Trx\Domain\TronGrid\V1;
 
 use Trx\Domain\Exceptions\ApiRequestException;
-use Trx\Domain\Exceptions\InvalidTronAddressException;
-use Trx\Domain\Facades\Validator;
 
 abstract readonly class BaseTronGrid
 {
@@ -31,18 +29,12 @@ abstract readonly class BaseTronGrid
     }
 
     /**
-     * @param string $address
      * @param \Closure $apiURL
      * @return string
      * @throws ApiRequestException
-     * @throws InvalidTronAddressException
      */
-    protected function fetch(string $address, \Closure $apiURL): string
+    protected function fetch(\Closure $apiURL): string
     {
-        if (! Validator::isTrxBase58($address)) {
-            throw new InvalidTronAddressException('Trx address is not valid');
-        }
-
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $apiURL());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

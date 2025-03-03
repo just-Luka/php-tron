@@ -8,12 +8,18 @@ use Trx\Data\Account\Account;
 use Trx\Data\Block;
 use Trx\Data\Transaction\Transaction;
 use Trx\Domain\Exceptions\ApiRequestException;
-use Trx\Domain\Exceptions\InvalidTronAddressException;
 use Trx\Domain\TronGrid\V1\Filters\Filterable;
 
 readonly class AccountTronGrid extends BaseTronGrid
 {
     use Filterable;
+
+    public function __construct(
+        private string $address
+    )
+    {
+        parent::__construct();
+    }
 
     protected function slug(): string
     {
@@ -21,46 +27,37 @@ readonly class AccountTronGrid extends BaseTronGrid
     }
 
     /**
-     * @param string $address
      * @return Account
      * @throws ApiRequestException
-     * @throws InvalidTronAddressException
      */
-    public function explore(string $address): Account
+    public function explore(): Account
     {
         return Account::fromJson($this->fetch(
-            $address,
-            fn() => $this->endpoint() . "/$address?" . $this->toQuery()
+            fn() => $this->endpoint() . "/$this->address?" . $this->toQuery()
         ));
     }
 
     /**
-     * @param string $address
      * @return array<int, Block>
      * @throws ApiRequestException
-     * @throws InvalidTronAddressException
      */
-    public function blocks(string $address): array
+    public function blocks(): array
     {
         $res = json_decode($this->fetch(
-            $address,
-            fn() => $this->endpoint() . "/$address/transactions?" . $this->toQuery()
+            fn() => $this->endpoint() . "/$this->address/transactions?" . $this->toQuery()
         ), true);
 
         return array_map(static fn($p) => Block::fromJson($p), $res['data']);
     }
 
     /**
-     * @param string $address
      * @return array<int, Transaction>
      * @throws ApiRequestException
-     * @throws InvalidTronAddressException
      */
-    public function transactions(string $address): array
+    public function transactions(): array
     {
         $res = json_decode($this->fetch(
-            $address,
-            fn() => $this->endpoint() . "/$address/transactions/trc20?" . $this->toQuery()
+            fn() => $this->endpoint() . "/$this->address/transactions/trc20?" . $this->toQuery()
         ), true);
 
         return array_map(static fn($p) => Transaction::fromJson($p), $res['data']);
