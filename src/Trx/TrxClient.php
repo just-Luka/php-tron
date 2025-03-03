@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace Trx;
 
-use Trx\Data\Account\Account;
-use Trx\Domain\Exceptions\ApiRequestException;
-use Trx\Domain\Exceptions\InvalidTronAddressException;
 use Trx\Domain\Networks\Tron\TronNetwork;
 use Trx\Domain\Networks\Tron\Wallet\TronWallet;
-use Trx\Domain\TronGrid\AccountTronGrid;
+use Trx\Domain\TronGrid\V1\AccountTronGrid;
 
 readonly class TrxClient
 {
+    public function __construct(
+        private bool $shastaTest = false,
+    ) {}
+
     /**
      * @return TronWallet
      */
@@ -22,13 +23,10 @@ readonly class TrxClient
     }
 
     /**
-     * @param $address
-     * @return Account
-     * @throws ApiRequestException
-     * @throws InvalidTronAddressException
+     * @return AccountTronGrid
      */
-    public function explore($address): Account
+    public function account(): AccountTronGrid
     {
-        return (new AccountTronGrid())->explore($address);
+        return new AccountTronGrid();
     }
 }

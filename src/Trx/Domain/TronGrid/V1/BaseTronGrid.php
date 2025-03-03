@@ -2,44 +2,49 @@
 
 declare(strict_types=1);
 
-namespace Trx\Domain\TronGrid;
+namespace Trx\Domain\TronGrid\V1;
 
-use Trx\Data\Account\Account;
 use Trx\Domain\Exceptions\ApiRequestException;
 use Trx\Domain\Exceptions\InvalidTronAddressException;
 use Trx\Domain\Facades\Validator;
 
-class AccountTronGrid extends BaseTronGrid
+abstract readonly class BaseTronGrid
 {
-    private const SLUG = "/v1/accounts";
+    private const MAIN_NET = 'https://api.trongrid.io/v1';
+    private const SHASTA_TESTNET = 'https://api.shasta.trongrid.io/v1';
+
+    public function __construct(
+        private ?string $apiKey = null,
+        private bool $testMode = false,
+    ) {
+    }
+
+    protected abstract function slug(): string;
 
     /**
-     * @param string $address
-     * @return Account
-     * @throws ApiRequestException
-     * @throws InvalidTronAddressException
+     * @return string
      */
-    public function explore(string $address): Account
+    protected function endpoint(): string
     {
-        return Account::fromJson($this->fetchAccount($address));
+        $url = $this->testMode ? self::SHASTA_TESTNET : self::MAIN_NET;
+        return $url . $this->slug();
     }
 
     /**
      * @param string $address
+     * @param \Closure $apiURL
      * @return string
      * @throws ApiRequestException
      * @throws InvalidTronAddressException
      */
-    protected function fetchAccount(string $address): string
+    protected function fetch(string $address, \Closure $apiURL): string
     {
         if (! Validator::isTrxBase58($address)) {
             throw new InvalidTronAddressException('Trx address is not valid');
         }
 
-        $apiURL = self::$apiURL . self::SLUG . "/$address";
-
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $apiURL);
+        curl_setopt($ch, CURLOPT_URL, $apiURL());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, [
             'Content-Type: application/json',
