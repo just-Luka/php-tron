@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Trx\Domain\TronGrid\V1;
 
 use Trx\Data\Account\Account;
-use Trx\Domain\Enum\ContractType;
+use Trx\Data\Block;
+use Trx\Data\Transaction\Transaction;
 use Trx\Domain\Exceptions\ApiRequestException;
 use Trx\Domain\Exceptions\InvalidTronAddressException;
 use Trx\Domain\TronGrid\V1\Filters\Filterable;
@@ -35,17 +36,33 @@ readonly class AccountTronGrid extends BaseTronGrid
 
     /**
      * @param string $address
-     * @param ContractType|null $contract
-     * @return string
+     * @return array<int, Block>
      * @throws ApiRequestException
      * @throws InvalidTronAddressException
      */
-    public function transactions(string $address, ?ContractType $contract = null): string
+    public function blocks(string $address): array
     {
-        $contractPath = $contract?->value ? $contract->value : '';
-        return $this->fetch(
+        $res = json_decode($this->fetch(
             $address,
-            fn() => $this->endpoint() . "/$address/transactions/$contractPath?" . $this->toQuery()
-        );
+            fn() => $this->endpoint() . "/$address/transactions?" . $this->toQuery()
+        ), true);
+
+        return array_map(static fn($p) => Block::fromJson($p), $res['data']);
+    }
+
+    /**
+     * @param string $address
+     * @return array<int, Transaction>
+     * @throws ApiRequestException
+     * @throws InvalidTronAddressException
+     */
+    public function transactions(string $address): array
+    {
+        $res = json_decode($this->fetch(
+            $address,
+            fn() => $this->endpoint() . "/$address/transactions/trc20?" . $this->toQuery()
+        ), true);
+
+        return array_map(static fn($p) => Transaction::fromJson($p), $res['data']);
     }
 }

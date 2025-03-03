@@ -11,7 +11,7 @@ trait Filterable
      * If no param is specified, it returns both confirmed and unconfirmed transactions.
      * Cannot be used at the same time with only_unconfirmed param.
      *
-     * @var bool
+     * @var string
      */
     protected readonly string $onlyConfirmed;
 
@@ -20,7 +20,7 @@ trait Filterable
      * If no param is specified, it returns both confirmed and unconfirmed transactions.
      * Cannot be used at the same time with only_confirmed param.
      *
-     * @var bool
+     * @var string
      */
     protected readonly string $onlyUnconfirmed;
 
@@ -70,14 +70,14 @@ trait Filterable
     /**
      * true | false. If true, only transactions to this address, default: false
      *
-     * @var bool
+     * @var string
      */
     protected readonly string $onlyTo;
 
     /**
      * true | false. If true, only transactions from this address, default: false
      *
-     * @var bool
+     * @var string
      */
     protected readonly string $onlyFrom;
 
