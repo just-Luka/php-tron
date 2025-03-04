@@ -16,11 +16,11 @@ readonly class AccountTronGrid extends BaseTronGrid
 
     public function __construct(
         private string $address
-    )
-    {
+    ) {
         parent::__construct();
     }
 
+    #[\Override]
     protected function slug(): string
     {
         return '/accounts';

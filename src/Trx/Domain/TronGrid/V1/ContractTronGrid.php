@@ -14,10 +14,11 @@ readonly class ContractTronGrid extends BaseTronGrid
 
     public function __construct(
         private string $contractAddr,
-    )
-    {
+    ) {
         parent::__construct();
     }
+
+    #[\Override]
     protected function slug(): string
     {
         return '/contracts';

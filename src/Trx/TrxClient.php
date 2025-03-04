@@ -15,7 +15,8 @@ use Trx\Domain\TronGrid\V1\ContractTronGrid;
 readonly class TrxClient
 {
     public function __construct(
-        private bool $shastaTest = false,
+        public ?string $apiKey = null,
+        public bool $testMode = false,
     ) {}
 
     /**
@@ -27,7 +28,7 @@ readonly class TrxClient
     }
 
     /**
-     * @param string $address
+     * @param string $address owner address in base58
      * @return AccountTronGrid
      * @throws InvalidTronAddressException
      */

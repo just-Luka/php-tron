@@ -17,9 +17,9 @@ final readonly class TronWallet
     /**
      * Create a new Wallet
      *
-     * @return Wallet|null
+     * @return Wallet
      */
-    public function create(): ?Wallet
+    public function create(): Wallet
     {
         $addressBin = Encoder58::addressBin($this->generatable->publicKey());
         $checksum = substr(
@@ -38,7 +38,7 @@ final readonly class TronWallet
      * Create a new array of multiple Wallets
      *
      * @param int $amount
-     * @return array<int, Wallet|null>
+     * @return array<int, Wallet>
      */
     public function createMultiple(int $amount): array
     {

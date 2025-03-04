@@ -12,6 +12,7 @@ readonly class AssetTronGrid extends BaseTronGrid
 {
     use Filterable;
 
+    #[\Override]
     protected function slug(): string
     {
         return '/assets';

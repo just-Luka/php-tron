@@ -14,8 +14,7 @@ abstract readonly class BaseTronGrid
     public function __construct(
         private ?string $apiKey = null,
         private bool $testMode = false,
-    ) {
-    }
+    ) {}
 
     protected abstract function slug(): string;
 
