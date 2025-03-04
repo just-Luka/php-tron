@@ -46,8 +46,8 @@ final readonly class Block
             $data['raw_data_hex'],
             $data['net_fee'],
             $data['energy_usage'],
-            $data['blockNumber'],
-            $data['block_timestamp'],
+            (int) $data['blockNumber'], # API returns sometimes int and string ...
+            (int) $data['block_timestamp'],
             $data['energy_fee'],
             $data['energy_usage_total'],
             $raw['contract'][0]['parameter']['value']['balance'] ?? null,
