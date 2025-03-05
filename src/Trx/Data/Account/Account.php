@@ -22,23 +22,21 @@ final readonly class Account
     ){}
 
     /**
-     * @param string $json
+     * @param array $data
      * @return Account
      */
-    public static function fromJson(string $json): Account
+    public static function fromJson(array $data): Account
     {
-        $account = json_decode($json, true);
-        $data = $account['data'][0];
-        $resourceData = $data['account_resource'];
+        $resource = $data['account_resource'];
 
         return new self(
             $data['owner_permission']['threshold'],
             $data['active_permission'][0]['threshold'],
             new AccountResource(
-                energyWindowOptimized: $resourceData['energy_window_optimized'],
-                energyUsage: $resourceData['energy_usage'],
-                latestConsumeTimeForEnergy: $resourceData['latest_consume_time_for_energy'],
-                energyWindowSize: $resourceData['energy_window_size'],
+                energyWindowOptimized: $resource['energy_window_optimized'],
+                energyUsage: $resource['energy_usage'],
+                latestConsumeTimeForEnergy: $resource['latest_consume_time_for_energy'],
+                energyWindowSize: $resource['energy_window_size'],
             ),
             $data['address'],
             $data['create_time'],

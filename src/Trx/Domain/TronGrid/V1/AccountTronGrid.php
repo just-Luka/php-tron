@@ -28,14 +28,16 @@ class AccountTronGrid extends BaseTronGrid
     }
 
     /**
-     * @return Account
+     * @return ?Account
      * @throws ApiRequestException
      */
-    public function explore(): Account
+    public function explore(): ?Account
     {
-        return Account::fromJson($this->fetch(
+        $res = json_decode($this->fetch(
             fn() => $this->endpoint() . "/$this->address?" . $this->toQuery()
-        ));
+        ), true);
+
+        return isset($res['data'][0]) ? Account::fromJson($res['data'][0]) : null;
     }
 
     /**
