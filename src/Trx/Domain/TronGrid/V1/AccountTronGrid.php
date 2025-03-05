@@ -10,15 +10,16 @@ use Trx\Data\Transaction\Transaction;
 use Trx\Domain\Exceptions\ApiRequestException;
 use Trx\Domain\TronGrid\V1\Filters\Filterable;
 
-readonly class AccountTronGrid extends BaseTronGrid
+class AccountTronGrid extends BaseTronGrid
 {
     use Filterable;
 
+    /**
+     * @param string $address
+     */
     public function __construct(
-        private string $address
-    ) {
-        parent::__construct();
-    }
+        private readonly string $address
+    ) {}
 
     #[\Override]
     protected function slug(): string
