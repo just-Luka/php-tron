@@ -8,10 +8,13 @@ use Trx\Data\Asset;
 use Trx\Domain\Exceptions\ApiRequestException;
 use Trx\Domain\TronGrid\V1\Filters\Filterable;
 
-readonly class AssetTronGrid extends BaseTronGrid
+class AssetTronGrid extends BaseTronGrid
 {
     use Filterable;
 
+    /**
+     * @return string
+     */
     #[\Override]
     protected function slug(): string
     {

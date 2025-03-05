@@ -6,16 +6,34 @@ namespace Trx\Domain\TronGrid\V1;
 
 use Trx\Domain\Exceptions\ApiRequestException;
 
-abstract readonly class BaseTronGrid
+abstract class BaseTronGrid
 {
     private const MAIN_NET = 'https://api.trongrid.io/v1';
     private const SHASTA_TESTNET = 'https://api.shasta.trongrid.io/v1';
+    private static ?string $apiKey;
+    private static bool $testmode;
 
-    public function __construct(
-        private ?string $apiKey = null,
-        private bool $testMode = false,
-    ) {}
+    /**
+     * @param string|null $apiKey
+     * @return void
+     */
+    public static function setApiKey(?string $apiKey): void
+    {
+        self::$apiKey = $apiKey;
+    }
 
+    /**
+     * @param bool $testmode
+     * @return void
+     */
+    public static function setTestmode(bool $testmode): void
+    {
+        self::$testmode = $testmode;
+    }
+
+    /**
+     * @return string
+     */
     protected abstract function slug(): string;
 
     /**
@@ -23,7 +41,7 @@ abstract readonly class BaseTronGrid
      */
     protected function endpoint(): string
     {
-        $url = $this->testMode ? self::SHASTA_TESTNET : self::MAIN_NET;
+        $url = self::$testmode ? self::SHASTA_TESTNET : self::MAIN_NET;
         return $url . $this->slug();
     }
 

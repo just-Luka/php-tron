@@ -8,15 +8,13 @@ use Trx\Data\Block;
 use Trx\Domain\Exceptions\ApiRequestException;
 use Trx\Domain\TronGrid\V1\Filters\Filterable;
 
-readonly class ContractTronGrid extends BaseTronGrid
+class ContractTronGrid extends BaseTronGrid
 {
     use Filterable;
 
     public function __construct(
-        private string $contractAddr,
-    ) {
-        parent::__construct();
-    }
+        private readonly string $contractAddr,
+    ) {}
 
     #[\Override]
     protected function slug(): string
