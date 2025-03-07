@@ -9,7 +9,7 @@ final readonly class AccountResource
     public function __construct(
         public bool $energyWindowOptimized,
         public ?int $energyUsage,
-        public int $latestConsumeTimeForEnergy,
+        public ?int $latestConsumeTimeForEnergy,
         public int $energyWindowSize,
     ){}
 }

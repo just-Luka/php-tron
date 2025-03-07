@@ -7,6 +7,7 @@ namespace Trx\Domain\Networks\Tron\Wallet;
 use Trx\Data\Wallet;
 use Trx\Domain\Contracts\Generatable;
 use Trx\Domain\Facades\Encoder58;
+use Trx\Domain\Facades\Validator;
 
 final readonly class TronWallet
 {
@@ -28,8 +29,13 @@ final readonly class TronWallet
             4,
         );
 
+        $address = Encoder58::encodeBase58(bin2hex($addressBin . $checksum));
+        if (! Validator::isTrxBase58($address)) {
+            $address = null;
+        }
+
         return new Wallet(
-            address: Encoder58::encodeBase58(bin2hex($addressBin . $checksum)),
+            address: $address,
             privateKey: $this->generatable->privateKey()
         );
     }

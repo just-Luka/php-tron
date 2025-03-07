@@ -35,7 +35,7 @@ final readonly class Account
             new AccountResource(
                 energyWindowOptimized: $resource['energy_window_optimized'],
                 energyUsage: $resource['energy_usage'] ?? null,
-                latestConsumeTimeForEnergy: $resource['latest_consume_time_for_energy'],
+                latestConsumeTimeForEnergy: $resource['latest_consume_time_for_energy'] ?? null,
                 energyWindowSize: $resource['energy_window_size'],
             ),
             $data['address'],

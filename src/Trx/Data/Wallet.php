@@ -7,14 +7,14 @@ namespace Trx\Data;
 final readonly class Wallet
 {
     public function __construct(
-        private string $address,
+        private ?string $address,
         private string $privateKey,
     ) {}
 
     /**
-     * @return string
+     * @return ?string
      */
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
         return $this->address;
     }
