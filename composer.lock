@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4853f7ce9fee3dd6859476be107815da",
+    "content-hash": "422260d13d3f0083e72fd8a36091bb6e",
     "packages": [
         {
             "name": "genkgo/php-asn1",
@@ -88,7 +88,7 @@
         },
         {
             "name": "kornrunner/secp256k1",
-            "version": "dev-main",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kornrunner/php-secp256k1.git",
@@ -107,7 +107,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^9"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -400,16 +399,16 @@
         },
         {
             "name": "simplito/elliptic-php",
-            "version": "dev-master",
+            "version": "1.0.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/simplito/elliptic-php.git",
-                "reference": "49cb6e11dee47b4619125a10e9f16a14032a897f"
+                "reference": "be321666781be2be2c89c79c43ffcac834bc8868"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/simplito/elliptic-php/zipball/49cb6e11dee47b4619125a10e9f16a14032a897f",
-                "reference": "49cb6e11dee47b4619125a10e9f16a14032a897f",
+                "url": "https://api.github.com/repos/simplito/elliptic-php/zipball/be321666781be2be2c89c79c43ffcac834bc8868",
+                "reference": "be321666781be2be2c89c79c43ffcac834bc8868",
                 "shasum": ""
             },
             "require": {
@@ -420,7 +419,6 @@
                 "phpbench/phpbench": "@dev",
                 "phpunit/phpunit": "*"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -460,9 +458,9 @@
             ],
             "support": {
                 "issues": "https://github.com/simplito/elliptic-php/issues",
-                "source": "https://github.com/simplito/elliptic-php/tree/master"
+                "source": "https://github.com/simplito/elliptic-php/tree/1.0.12"
             },
-            "time": "2025-02-21T13:56:33+00:00"
+            "time": "2024-01-09T14:57:04+00:00"
         }
     ],
     "packages-dev": [
@@ -572,7 +570,7 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.x-dev",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
@@ -597,7 +595,6 @@
                 "phpspec/prophecy": "^1.10",
                 "phpunit/phpunit": "^7.5.20 || ^8.5.23 || ^9.5.13"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -691,7 +688,7 @@
         },
         {
             "name": "phar-io/manifest",
-            "version": "dev-master",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phar-io/manifest.git",
@@ -711,7 +708,6 @@
                 "phar-io/version": "^3.0.1",
                 "php": "^7.2 || ^8.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -810,7 +806,7 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "dev-main",
+            "version": "12.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
@@ -843,7 +839,6 @@
                 "ext-pcov": "PHP extension that provides line coverage",
                 "ext-xdebug": "PHP extension that provides line coverage as well as branch and path coverage"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -888,7 +883,7 @@
         },
         {
             "name": "phpunit/php-file-iterator",
-            "version": "dev-main",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
@@ -906,7 +901,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -950,7 +944,7 @@
         },
         {
             "name": "phpunit/php-invoker",
-            "version": "dev-main",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-invoker.git",
@@ -972,7 +966,6 @@
             "suggest": {
                 "ext-pcntl": "*"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1015,7 +1008,7 @@
         },
         {
             "name": "phpunit/php-text-template",
-            "version": "dev-main",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-text-template.git",
@@ -1033,7 +1026,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1076,7 +1068,7 @@
         },
         {
             "name": "phpunit/php-timer",
-            "version": "dev-main",
+            "version": "8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
@@ -1094,7 +1086,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1137,16 +1128,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "dev-main",
+            "version": "12.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "041cfe62798f931291f3bf88a7df6c532c888a03"
+                "reference": "2845e49082ef7acc4a71a2ef71bbf32f31da22c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/041cfe62798f931291f3bf88a7df6c532c888a03",
-                "reference": "041cfe62798f931291f3bf88a7df6c532c888a03",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2845e49082ef7acc4a71a2ef71bbf32f31da22c9",
+                "reference": "2845e49082ef7acc4a71a2ef71bbf32f31da22c9",
                 "shasum": ""
             },
             "require": {
@@ -1176,14 +1167,13 @@
                 "sebastian/version": "^6.0.0",
                 "staabm/side-effects-detector": "^1.0.5"
             },
-            "default-branch": true,
             "bin": [
                 "phpunit"
             ],
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "12.1-dev"
+                    "dev-main": "12.0-dev"
                 }
             },
             "autoload": {
@@ -1215,7 +1205,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/main"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.0.7"
             },
             "funding": [
                 {
@@ -1231,11 +1221,11 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-07T07:33:13+00:00"
+            "time": "2025-03-07T07:32:22+00:00"
         },
         {
             "name": "psr/log",
-            "version": "dev-master",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
@@ -1250,7 +1240,6 @@
             "require": {
                 "php": ">=8.0.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1286,7 +1275,7 @@
         },
         {
             "name": "sebastian/cli-parser",
-            "version": "dev-main",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/cli-parser.git",
@@ -1304,7 +1293,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1344,7 +1332,7 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "dev-main",
+            "version": "7.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
@@ -1369,7 +1357,6 @@
             "suggest": {
                 "ext-bcmath": "For comparing BcMath\\Number objects"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1425,7 +1412,7 @@
         },
         {
             "name": "sebastian/complexity",
-            "version": "dev-main",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/complexity.git",
@@ -1444,7 +1431,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1484,16 +1470,16 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "dev-main",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "040aca9119807f7f85cb4d607e723af5bd59fe79"
+                "reference": "7ab1ea946c012266ca32390913653d844ecd085f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/040aca9119807f7f85cb4d607e723af5bd59fe79",
-                "reference": "040aca9119807f7f85cb4d607e723af5bd59fe79",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/7ab1ea946c012266ca32390913653d844ecd085f",
+                "reference": "7ab1ea946c012266ca32390913653d844ecd085f",
                 "shasum": ""
             },
             "require": {
@@ -1503,7 +1489,6 @@
                 "phpunit/phpunit": "^12.0",
                 "symfony/process": "^7.2"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1540,7 +1525,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/diff/issues",
                 "security": "https://github.com/sebastianbergmann/diff/security/policy",
-                "source": "https://github.com/sebastianbergmann/diff/tree/main"
+                "source": "https://github.com/sebastianbergmann/diff/tree/7.0.0"
             },
             "funding": [
                 {
@@ -1548,11 +1533,11 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-07T11:04:51+00:00"
+            "time": "2025-02-07T04:55:46+00:00"
         },
         {
             "name": "sebastian/environment",
-            "version": "dev-main",
+            "version": "8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
@@ -1573,7 +1558,6 @@
             "suggest": {
                 "ext-posix": "*"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1617,7 +1601,7 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "dev-main",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
@@ -1637,7 +1621,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1696,7 +1679,7 @@
         },
         {
             "name": "sebastian/global-state",
-            "version": "dev-main",
+            "version": "8.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/global-state.git",
@@ -1717,7 +1700,6 @@
                 "ext-dom": "*",
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1759,7 +1741,7 @@
         },
         {
             "name": "sebastian/lines-of-code",
-            "version": "dev-main",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/lines-of-code.git",
@@ -1778,7 +1760,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1818,7 +1799,7 @@
         },
         {
             "name": "sebastian/object-enumerator",
-            "version": "dev-main",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/object-enumerator.git",
@@ -1838,7 +1819,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1877,7 +1857,7 @@
         },
         {
             "name": "sebastian/object-reflector",
-            "version": "dev-main",
+            "version": "5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/object-reflector.git",
@@ -1895,7 +1875,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1934,7 +1913,7 @@
         },
         {
             "name": "sebastian/recursion-context",
-            "version": "dev-main",
+            "version": "7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/recursion-context.git",
@@ -1952,7 +1931,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -1999,7 +1977,7 @@
         },
         {
             "name": "sebastian/type",
-            "version": "dev-main",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/type.git",
@@ -2017,7 +1995,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^12.0"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2057,7 +2034,7 @@
         },
         {
             "name": "sebastian/version",
-            "version": "dev-main",
+            "version": "6.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/version.git",
@@ -2072,7 +2049,6 @@
             "require": {
                 "php": ">=8.3"
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2214,11 +2190,9 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "beta",
     "stability-flags": {
-        "kornrunner/secp256k1": 20,
-        "monolog/monolog": 20,
-        "simplito/elliptic-php": 20
+        "monolog/monolog": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

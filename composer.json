@@ -28,8 +28,8 @@
         "php": ">=8.2",
         "ext-curl": "*",
         "ext-gmp": "*",
-        "kornrunner/secp256k1": "dev-main",
-        "simplito/elliptic-php": "dev-master"
+        "kornrunner/secp256k1": "^0.3",
+        "simplito/elliptic-php": "^1.0.12"
     },
     "require-dev": {
         "phpunit/phpunit": "*",
