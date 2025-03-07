@@ -59,6 +59,8 @@ abstract class BaseTronGrid
             'Content-Type: application/json',
             'Accept: application/json'
         ]);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
         $response = curl_exec($ch);
         if ($response === false) {
