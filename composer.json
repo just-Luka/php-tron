@@ -1,6 +1,6 @@
 {
     "name": "just-luka/php-tron",
-    "version": "1.0.0",
+    "version": "1.1.0-beta",
     "description": "PHP package for interacting with TRX network",
     "type": "library",
     "license": "MIT",
@@ -23,7 +23,7 @@
             "email": "info.tsiklauri@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "beta",
     "require": {
         "php": ">=8.2",
         "ext-curl": "*",
