@@ -12,7 +12,10 @@
     "autoload-dev": {
         "psr-4": {
             "Trx\\Tests\\": "tests/"
-        }
+        },
+        "files": [
+            "dev/helpers.php"
+        ]
     },
     "authors": [
         {
@@ -29,6 +32,7 @@
         "simplito/elliptic-php": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "monolog/monolog": "^3.0@dev"
     }
 }
