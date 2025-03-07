@@ -52,13 +52,19 @@ abstract class BaseTronGrid
      */
     protected function fetch(\Closure $apiURL): string
     {
+        $headers = [
+            'Content-Type: application/json',
+            'Accept: application/json',
+        ];
+
+        if (isset(self::$apiKey)) {
+            $headers[] = 'TRON-PRO-API-KEY: '.self::$apiKey;
+        }
+
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $apiURL());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-            'Accept: application/json'
-        ]);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
