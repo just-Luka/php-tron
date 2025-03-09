@@ -1,8 +1,10 @@
 <br>
 <br>
-<img src="https://just-luka.github.io/php.svg" width="200" style="vertical-align: middle;" alt="PHP">
-<span style="font-size: 44px; font-weight: bold; margin: 0 15px; vertical-align: middle;">X</span>
-<img src="https://just-luka.github.io/trongrid.png" width="300" style="vertical-align: middle;" alt="TronGrid">
+<p>
+  <img src="https://just-luka.github.io/php.svg" width="200" style="vertical-align: middle;" alt="PHP">
+  <b>X</b>
+  <img src="https://just-luka.github.io/trongrid.png" width="300" style="vertical-align: middle;" alt="TronGrid">
+</p>
 <br>
 <br>
 <p>
