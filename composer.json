@@ -1,6 +1,6 @@
 {
     "name": "just-luka/php-tron",
-    "version": "1.1.0-beta",
+    "version": "1.1.0",
     "description": "PHP package for interacting with TRX network",
     "type": "library",
     "license": "MIT",
@@ -12,10 +12,7 @@
     "autoload-dev": {
         "psr-4": {
             "Trx\\Tests\\": "tests/"
-        },
-        "files": [
-            "dev/helpers.php"
-        ]
+        }
     },
     "authors": [
         {
@@ -23,7 +20,8 @@
             "email": "info.tsiklauri@gmail.com"
         }
     ],
-    "minimum-stability": "beta",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
         "php": ">=8.2",
         "ext-curl": "*",
@@ -33,6 +31,6 @@
     },
     "require-dev": {
         "phpunit/phpunit": "*",
-        "monolog/monolog": "^3.0@dev"
+        "monolog/monolog": "^3.0"
     }
 }
