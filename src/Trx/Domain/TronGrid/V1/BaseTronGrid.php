@@ -47,10 +47,10 @@ abstract class BaseTronGrid
 
     /**
      * @param \Closure $apiURL
-     * @return string
+     * @return array
      * @throws ApiRequestException
      */
-    protected function fetch(\Closure $apiURL): string
+    protected function fetch(\Closure $apiURL): array
     {
         $headers = [
             'Content-Type: application/json',
@@ -68,9 +68,10 @@ abstract class BaseTronGrid
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
-        $response = curl_exec($ch);
-        if ($response === false) {
-            throw new ApiRequestException("cURL Error: " . curl_error($ch));
+        $response = json_decode(curl_exec($ch), true);
+
+        if ($response['success'] === false) {
+            throw new ApiRequestException($response['error'], $response['statusCode']);
         }
 
         curl_close($ch);

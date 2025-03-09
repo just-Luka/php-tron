@@ -33,9 +33,7 @@ class AccountTronGrid extends BaseTronGrid
      */
     public function explore(): ?Account
     {
-        $res = json_decode($this->fetch(
-            fn() => $this->endpoint() . "/$this->address?" . $this->toQuery()
-        ), true);
+        $res = $this->fetch(fn() => $this->endpoint() . "/$this->address?" . $this->toQuery());
 
         return isset($res['data'][0]) ? Account::fromJson($res['data'][0]) : null;
     }
@@ -46,9 +44,7 @@ class AccountTronGrid extends BaseTronGrid
      */
     public function blocks(): array
     {
-        $res = json_decode($this->fetch(
-            fn() => $this->endpoint() . "/$this->address/transactions?" . $this->toQuery()
-        ), true);
+        $res = $this->fetch(fn() => $this->endpoint() . "/$this->address/transactions?" . $this->toQuery());
 
         return array_map(static fn($p) => Block::fromJson($p), $res['data']);
     }
@@ -59,9 +55,7 @@ class AccountTronGrid extends BaseTronGrid
      */
     public function transactions(): array
     {
-        $res = json_decode($this->fetch(
-            fn() => $this->endpoint() . "/$this->address/transactions/trc20?" . $this->toQuery()
-        ), true);
+        $res = $this->fetch(fn() => $this->endpoint() . "/$this->address/transactions/trc20?" . $this->toQuery());
 
         return array_map(static fn($p) => Transaction::fromJson($p), $res['data']);
     }

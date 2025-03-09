@@ -27,7 +27,7 @@ class AssetTronGrid extends BaseTronGrid
      */
     public function all(): array
     {
-        $res = json_decode($this->fetch(fn() => $this->endpoint() . "?" . $this->toQuery()), true);
+        $res = $this->fetch(fn() => $this->endpoint() . "?" . $this->toQuery());
 
         return array_map(static fn($p) => Asset::fromJson($p), $res['data']);
     }
@@ -39,7 +39,7 @@ class AssetTronGrid extends BaseTronGrid
      */
     public function byName(string $name): array
     {
-        $res = json_decode($this->fetch(fn() => $this->endpoint() . "/$name/list?" . $this->toQuery()), true);
+        $res = $this->fetch(fn() => $this->endpoint() . "/$name/list?" . $this->toQuery());
 
         return array_map(static fn($p) => Asset::fromJson($p), $res['data']);
     }
@@ -51,7 +51,7 @@ class AssetTronGrid extends BaseTronGrid
      */
     public function byId(string|int $id): array
     {
-        $res = json_decode($this->fetch(fn() => $this->endpoint() . "/$id?" . $this->toQuery()), true);
+        $res = $this->fetch(fn() => $this->endpoint() . "/$id?" . $this->toQuery());
 
         return array_map(static fn($p) => Asset::fromJson($p), $res['data']);
     }

@@ -28,9 +28,7 @@ class ContractTronGrid extends BaseTronGrid
      */
     public function blocks(): array
     {
-        $res = json_decode($this->fetch(
-            fn() => $this->endpoint() . "/$this->contractAddr/transactions?" . $this->toQuery()
-        ), true);
+        $res = $this->fetch(fn() => $this->endpoint() . "/$this->contractAddr/transactions?" . $this->toQuery());
 
         return array_map(static fn($p) => Block::fromJson($p), $res['data']);
     }
@@ -41,8 +39,6 @@ class ContractTronGrid extends BaseTronGrid
      */
     public function tokens(): array
     {
-        return json_decode($this->fetch(
-            fn() => $this->endpoint() . "/$this->contractAddr/tokens?" . $this->toQuery()
-        ), true)['data'];
+        return $this->fetch(fn() => $this->endpoint() . "/$this->contractAddr/tokens?" . $this->toQuery())['data'];
     }
 }
