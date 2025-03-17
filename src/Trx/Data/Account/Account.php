@@ -14,10 +14,10 @@ final readonly class Account
         public int $createTime,
         public ?int $latestConsumeTime,
         public ?int $netUsage,
-        public int $latestOperationTime,
+        public ?int $latestOperationTime,
         public int $balance,
         public array $trc20,
-        public int $latestConsumeFreeTime,
+        public ?int $latestConsumeFreeTime,
         public int $netWindowSize,
     ){}
 
@@ -42,10 +42,10 @@ final readonly class Account
             $data['create_time'],
             $data['latest_consume_time'] ?? null,
             $data['net_usage'] ?? null,
-            $data['latest_opration_time'],
+            $data['latest_opration_time'] ?? null,
             $data['balance'],
             $data['trc20'],
-            $data['latest_consume_free_time'],
+            $data['latest_consume_free_time'] ?? null,
             $data['net_window_size'],
         );
     }
