@@ -48,6 +48,6 @@ final readonly class TronWallet
      */
     public function createMultiple(int $amount): array
     {
-        return array_map(fn() => $this->create(), range(1, $amount));
+        return $amount <= 0 ? [] : array_map(fn() => $this->create(), range(1, $amount));
     }
 }

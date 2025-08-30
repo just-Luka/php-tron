@@ -39,8 +39,12 @@ final readonly class Encoder58
      */
     public static function addressBin(string $publicKey): string
     {
-        $addressBytes = substr(hash('sha3-256', hex2bin($publicKey)), -40);
+        $bin = hex2bin($publicKey);
+        if ($bin === false) {
+            return '';
+        }
 
+        $addressBytes = substr(hash('sha3-256', $bin), -40);
         $tronAddressHex = "41" . $addressBytes;
 
         return hex2bin($tronAddressHex) ?: '';
