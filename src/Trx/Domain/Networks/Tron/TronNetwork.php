@@ -10,12 +10,19 @@ use Trx\Domain\Networks\Tron\Wallet\TronWallet;
 
 final class TronNetwork implements Generatable
 {
+    private readonly string $privateKeyHex;
+
+    public function __construct()
+    {
+        $this->privateKeyHex = bin2hex(random_bytes(32));
+    }
+
     /**
      * @return string
      */
     public function publicKey(): string
     {
-        $keyPair = (new EC('secp256k1'))->keyFromPrivate($this->privateKey());
+        $keyPair = (new EC('secp256k1'))->keyFromPrivate($this->privateKeyHex);
 
         return substr($keyPair->getPublic(false, 'hex'), 2);
     }
@@ -25,7 +32,7 @@ final class TronNetwork implements Generatable
      */
     public function privateKey(): string
     {
-        return bin2hex(random_bytes(32));
+        return $this->privateKeyHex;
     }
 
     /**

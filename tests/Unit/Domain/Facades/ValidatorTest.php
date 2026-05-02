@@ -24,13 +24,17 @@ class ValidatorTest extends TestCase
     public static function invalidTrxAddressesProvider(): array
     {
         return [
-            'too short'         => ['T123'],
-            'too long'          => ['T' . str_repeat('1', 40)],
-            'missing T prefix'  => ['A123456789012345678901234567890123'],
-            'lowercase prefix'  => ['t123456789012345678901234567890123'],
-            'invalid chars'     => ['T12345678901234567890123456789!@#$'],
-            'empty string'      => [''],
-            'only T'            => ['T'],
+            'too short'                   => ['T123'],
+            'too long'                    => ['T' . str_repeat('1', 40)],
+            'missing T prefix'            => ['A123456789012345678901234567890123'],
+            'lowercase prefix'            => ['t123456789012345678901234567890123'],
+            'invalid chars'               => ['T12345678901234567890123456789!@#$'],
+            'empty string'                => [''],
+            'only T'                      => ['T'],
+            'contains zero digit'         => ['T0234567890123456789012345678901234'],
+            'contains uppercase O'        => ['TO234567890123456789012345678901234'],
+            'contains uppercase I'        => ['TI234567890123456789012345678901234'],
+            'contains lowercase l'        => ['Tl234567890123456789012345678901234'],
         ];
     }
 }

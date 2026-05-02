@@ -30,8 +30,8 @@ final readonly class Account
         $resource = $data['account_resource'];
 
         return new self(
-            $data['owner_permission']['threshold'],
-            $data['active_permission'][0]['threshold'],
+            $data['owner_permission']['threshold'] ?? 0,
+            $data['active_permission'][0]['threshold'] ?? 0,
             new AccountResource(
                 energyWindowOptimized: $resource['energy_window_optimized'],
                 energyUsage: $resource['energy_usage'] ?? null,
@@ -44,7 +44,7 @@ final readonly class Account
             $data['net_usage'] ?? null,
             $data['latest_opration_time'] ?? null,
             $data['balance'],
-            $data['trc20'],
+            $data['trc20'] ?? [],
             $data['latest_consume_free_time'] ?? null,
             $data['net_window_size'],
         );

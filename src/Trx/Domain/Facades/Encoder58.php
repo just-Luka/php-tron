@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Trx\Domain\Facades;
 
+use kornrunner\Keccak;
+
 final readonly class Encoder58
 {
     private const TRON_ALPHABIT = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
@@ -44,7 +46,7 @@ final readonly class Encoder58
             return '';
         }
 
-        $addressBytes = substr(hash('sha3-256', $bin), -40);
+        $addressBytes = substr(Keccak::hash($bin, 256), -40);
         $tronAddressHex = "41" . $addressBytes;
 
         return hex2bin($tronAddressHex) ?: '';

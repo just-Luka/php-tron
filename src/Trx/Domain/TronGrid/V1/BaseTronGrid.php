@@ -10,26 +10,11 @@ abstract class BaseTronGrid
 {
     private const MAIN_NET = 'https://api.trongrid.io/v1';
     private const SHASTA_TESTNET = 'https://api.shasta.trongrid.io/v1';
-    private static ?string $apiKey;
-    private static bool $testmode;
 
-    /**
-     * @param string|null $apiKey
-     * @return void
-     */
-    public static function setApiKey(?string $apiKey): void
-    {
-        self::$apiKey = $apiKey;
-    }
-
-    /**
-     * @param bool $testmode
-     * @return void
-     */
-    public static function setTestmode(bool $testmode): void
-    {
-        self::$testmode = $testmode;
-    }
+    public function __construct(
+        private readonly ?string $apiKey,
+        private readonly bool $testmode,
+    ) {}
 
     /**
      * @return string
@@ -41,7 +26,7 @@ abstract class BaseTronGrid
      */
     protected function endpoint(): string
     {
-        $url = self::$testmode ? self::SHASTA_TESTNET : self::MAIN_NET;
+        $url = $this->testmode ? self::SHASTA_TESTNET : self::MAIN_NET;
         return $url . $this->slug();
     }
 
@@ -57,8 +42,8 @@ abstract class BaseTronGrid
             'Accept: application/json',
         ];
 
-        if (isset(self::$apiKey)) {
-            $headers[] = 'TRON-PRO-API-KEY: '.self::$apiKey;
+        if ($this->apiKey !== null) {
+            $headers[] = 'TRON-PRO-API-KEY: ' . $this->apiKey;
         }
 
         $ch = curl_init();
@@ -68,14 +53,22 @@ abstract class BaseTronGrid
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
         curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 
-        $response = json_decode(curl_exec($ch), true);
+        $raw = curl_exec($ch);
 
-        if ($response['success'] === false) {
-            throw new ApiRequestException($response['error'], $response['statusCode']);
+        if ($raw === false) {
+            $error = curl_error($ch);
+            curl_close($ch);
+            throw new ApiRequestException($error ?: 'cURL request failed', 0);
         }
 
         curl_close($ch);
 
-        return $response;
+        $response = json_decode($raw, true);
+
+        if (isset($response['success']) && $response['success'] === false) {
+            throw new ApiRequestException($response['error'] ?? 'Unknown error', $response['statusCode'] ?? 0);
+        }
+
+        return $response ?? [];
     }
 }

@@ -14,12 +14,13 @@ class AccountTronGrid extends BaseTronGrid
 {
     use Filterable;
 
-    /**
-     * @param string $address
-     */
     public function __construct(
-        private readonly string $address
-    ) {}
+        private readonly string $address,
+        ?string $apiKey,
+        bool $testmode,
+    ) {
+        parent::__construct($apiKey, $testmode);
+    }
 
     #[\Override]
     protected function slug(): string

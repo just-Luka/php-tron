@@ -36,29 +36,30 @@ final readonly class Block
      */
     public static function fromJson(array $data): Block
     {
-        $raw = $data['raw_data'];
+        $raw      = $data['raw_data'];
+        $contract = $raw['contract'][0]['parameter']['value'] ?? [];
 
         return new self(
-            $data['ret'],
-            $data['signature'],
-            $data['txID'],
-            $data['net_usage'],
-            $data['raw_data_hex'],
-            $data['net_fee'],
-            $data['energy_usage'],
-            (int) $data['blockNumber'], # API returns sometimes int and string ...
-            (int) $data['block_timestamp'],
-            $data['energy_fee'],
-            $data['energy_usage_total'],
-            $raw['contract'][0]['parameter']['value']['balance'] ?? null,
-            $raw['contract'][0]['parameter']['value']['resource'] ?? null,
-            $raw['contract'][0]['parameter']['value']['receiver_address'] ?? null,
-            $raw['contract'][0]['parameter']['value']['owner_address'] ?? null,
-            $raw['ref_block_bytes'],
-            $raw['ref_block_hash'],
-            $raw['expiration'],
-            $raw['timestamp'],
-            $data['internal_transactions'],
+            $data['ret'] ?? [],
+            $data['signature'] ?? [],
+            $data['txID'] ?? '',
+            $data['net_usage'] ?? 0,
+            $data['raw_data_hex'] ?? '',
+            $data['net_fee'] ?? 0,
+            $data['energy_usage'] ?? 0,
+            (int) ($data['blockNumber'] ?? 0),
+            (int) ($data['block_timestamp'] ?? 0),
+            $data['energy_fee'] ?? 0,
+            $data['energy_usage_total'] ?? 0,
+            $contract['balance'] ?? null,
+            $contract['resource'] ?? null,
+            $contract['receiver_address'] ?? null,
+            $contract['owner_address'] ?? null,
+            $raw['ref_block_bytes'] ?? '',
+            $raw['ref_block_hash'] ?? '',
+            $raw['expiration'] ?? 0,
+            $raw['timestamp'] ?? 0,
+            $data['internal_transactions'] ?? [],
         );
     }
 }

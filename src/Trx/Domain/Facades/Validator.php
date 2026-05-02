@@ -14,6 +14,6 @@ final readonly class Validator
      */
     public static function isTrxBase58(string $address): bool
     {
-        return preg_match('/^T[a-zA-Z0-9]{33}$/', $address) === 1;
+        return preg_match('/^T[1-9A-HJ-NP-Za-km-z]{33}$/', $address) === 1;
     }
 }

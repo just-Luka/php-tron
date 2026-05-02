@@ -6,151 +6,102 @@ namespace Trx\Domain\TronGrid\V1\Filters;
 
 trait Filterable
 {
-    /**
-     * true | false. If false, it returns both confirmed and unconfirmed transactions.
-     * If no param is specified, it returns both confirmed and unconfirmed transactions.
-     * Cannot be used at the same time with only_unconfirmed param.
-     *
-     * @var string
-     */
-    protected readonly string $onlyConfirmed;
+    private array $filters = [];
 
     /**
-     * true | false. If false, it returns both confirmed and unconfirmed transactions.
-     * If no param is specified, it returns both confirmed and unconfirmed transactions.
-     * Cannot be used at the same time with only_confirmed param.
-     *
-     * @var string
+     * Only return confirmed transactions.
+     * Cannot be used with filterOnlyUnconfirmed().
      */
-    protected readonly string $onlyUnconfirmed;
+    public function filterOnlyConfirmed(): static
+    {
+        $this->filters['only_confirmed'] = 'true';
+        return $this;
+    }
 
     /**
-     * number of transactions per page, default 20, max 200
-     *
-     * @var int
+     * Only return unconfirmed transactions.
+     * Cannot be used with filterOnlyConfirmed().
      */
-    protected readonly int $limit;
+    public function filterOnlyUnconfirmed(): static
+    {
+        $this->filters['only_unconfirmed'] = 'true';
+        return $this;
+    }
 
     /**
-     * fingerprint of the last transaction returned by the previous page;
-     * when using it, the other parameters and filters should remain the same
-     *
-     * @var string
+     * Number of transactions per page, default 20, max 200.
      */
-    protected readonly string $fingerprint;
+    public function filterLimit(int $limit): static
+    {
+        $this->filters['limit'] = $limit;
+        return $this;
+    }
+
+    /**
+     * Fingerprint of the last transaction returned by the previous page.
+     */
+    public function filterFingerprint(string $fingerprint): static
+    {
+        $this->filters['fingerprint'] = $fingerprint;
+        return $this;
+    }
+
+    /**
+     * Contract address in base58 or hex.
+     */
+    public function filterContractAddress(string $contractAddress): static
+    {
+        $this->filters['contract_address'] = $contractAddress;
+        return $this;
+    }
 
     /**
      * block_timestamp,asc | block_timestamp,desc (default)
-     *
-     * @var string
      */
-    protected readonly string $orderBy;
-
-    /**
-     * minimum block_timestamp, default 0
-     *
-     * @var \DateTime
-     */
-    protected readonly string $minTimestamp;
-
-    /**
-     * maximum block_timestamp, default now
-     *
-     * @var \DateTime
-     */
-    protected readonly string $maxTimestamp;
-
-    /**
-     * contract address in base58 or hex
-     *
-     * @var string
-     */
-    protected readonly string $contractAddress;
-
-    /**
-     * true | false. If true, only transactions to this address, default: false
-     *
-     * @var string
-     */
-    protected readonly string $onlyTo;
-
-    /**
-     * true | false. If true, only transactions from this address, default: false
-     *
-     * @var string
-     */
-    protected readonly string $onlyFrom;
-
-    public function filterOnlyConfirmed(): static
-    {
-        $this->onlyConfirmed = 'true';
-        return $this;
-    }
-
-    public function filterOnlyUnconfirmed(): static
-    {
-        $this->onlyUnconfirmed = 'true';
-        return $this;
-    }
-
-    public function filterLimit(int $limit): static
-    {
-        $this->limit = $limit;
-        return $this;
-    }
-
-    public function filterFingerprint(string $fingerprint): static
-    {
-        $this->fingerprint = $fingerprint;
-        return $this;
-    }
-
-    public function filterContractAddress(string $contractAddress): static
-    {
-        $this->contractAddress = $contractAddress;
-        return $this;
-    }
-
     public function filterOrderBy(string $orderBy): static
     {
-        $this->orderBy = $orderBy;
+        $this->filters['order_by'] = $orderBy;
         return $this;
     }
 
+    /**
+     * Minimum block_timestamp, default 0.
+     */
     public function filterMinTimestamp(string $minTimestamp): static
     {
-        $this->minTimestamp = $minTimestamp;
+        $this->filters['min_timestamp'] = $minTimestamp;
         return $this;
     }
 
+    /**
+     * Maximum block_timestamp, default now.
+     */
     public function filterMaxTimestamp(string $maxTimestamp): static
     {
-        $this->maxTimestamp = $maxTimestamp;
+        $this->filters['max_timestamp'] = $maxTimestamp;
         return $this;
     }
 
+    /**
+     * If true, only transactions to this address.
+     */
     public function filterOnlyTo(): static
     {
-        $this->onlyTo = 'true';
+        $this->filters['only_to'] = 'true';
         return $this;
     }
 
+    /**
+     * If true, only transactions from this address.
+     */
     public function filterOnlyFrom(): static
     {
-        $this->onlyFrom = 'true';
+        $this->filters['only_from'] = 'true';
         return $this;
     }
 
     protected function toQuery(): string
     {
-        return http_build_query(
-            array_filter(
-                array_combine(
-                    array_map(fn($key) => strtolower(preg_replace('/([a-z])([A-Z])/', '$1_$2', $key)), array_keys(get_object_vars($this))),
-                    get_object_vars($this)
-                ),
-                static fn($value) => $value !== null
-            )
-        );
+        return http_build_query($this->filters);
     }
 }

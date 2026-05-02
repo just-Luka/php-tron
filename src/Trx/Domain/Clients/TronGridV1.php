@@ -20,7 +20,7 @@ trait TronGridV1
     public function account(string $address): AccountTronGrid
     {
         $this->validateAddress($address);
-        return new AccountTronGrid($address);
+        return new AccountTronGrid($address, $this->apiKey, $this->testMode);
     }
 
     /**
@@ -28,7 +28,7 @@ trait TronGridV1
      */
     public function asset(): AssetTronGrid
     {
-        return new AssetTronGrid();
+        return new AssetTronGrid($this->apiKey, $this->testMode);
     }
 
     /**
@@ -39,12 +39,10 @@ trait TronGridV1
     public function contract(string $address): ContractTronGrid
     {
         $this->validateAddress($address);
-        return new ContractTronGrid($address);
+        return new ContractTronGrid($address, $this->apiKey, $this->testMode);
     }
 
     /**
-     * Validates if the given address is a valid Tron address.
-     *
      * @throws InvalidTronAddressException
      */
     private function validateAddress(string $address): void

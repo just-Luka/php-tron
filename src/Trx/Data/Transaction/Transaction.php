@@ -22,21 +22,21 @@ final readonly class Transaction
      */
     public static function fromJson(array $data): Transaction
     {
-        $info = $data['token_info'];
+        $info = $data['token_info'] ?? [];
 
         return new self(
-            $data['transaction_id'],
+            $data['transaction_id'] ?? '',
             new TokenInfo(
-                symbol: $info['symbol'],
-                address: $info['address'],
-                decimals: $info['decimals'],
-                name: $info['name'],
+                symbol: $info['symbol'] ?? '',
+                address: $info['address'] ?? '',
+                decimals: $info['decimals'] ?? 0,
+                name: $info['name'] ?? '',
             ),
-            $data['block_timestamp'],
-            $data['from'],
-            $data['to'],
-            $data['type'],
-            $data['value'],
+            $data['block_timestamp'] ?? 0,
+            $data['from'] ?? '',
+            $data['to'] ?? '',
+            $data['type'] ?? '',
+            $data['value'] ?? '',
         );
     }
 }

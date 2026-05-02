@@ -26,7 +26,8 @@
         "ext-curl": "*",
         "ext-gmp": "*",
         "kornrunner/secp256k1": "^0.3",
-        "simplito/elliptic-php": "^1.0.12"
+        "simplito/elliptic-php": "^1.0.12",
+        "kornrunner/keccak": "^1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "*",

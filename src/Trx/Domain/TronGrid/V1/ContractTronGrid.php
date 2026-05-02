@@ -14,7 +14,11 @@ class ContractTronGrid extends BaseTronGrid
 
     public function __construct(
         private readonly string $contractAddr,
-    ) {}
+        ?string $apiKey,
+        bool $testmode,
+    ) {
+        parent::__construct($apiKey, $testmode);
+    }
 
     #[\Override]
     protected function slug(): string

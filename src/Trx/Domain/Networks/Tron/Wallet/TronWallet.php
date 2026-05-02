@@ -31,7 +31,7 @@ final readonly class TronWallet
 
         $address = Encoder58::encodeBase58(bin2hex($addressBin . $checksum));
         if (! Validator::isTrxBase58($address)) {
-            $address = null;
+            throw new \RuntimeException("Derived address '$address' failed Base58 validation — key derivation error.");
         }
 
         return new Wallet(

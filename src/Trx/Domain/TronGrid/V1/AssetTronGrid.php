@@ -12,9 +12,11 @@ class AssetTronGrid extends BaseTronGrid
 {
     use Filterable;
 
-    /**
-     * @return string
-     */
+    public function __construct(?string $apiKey, bool $testmode)
+    {
+        parent::__construct($apiKey, $testmode);
+    }
+
     #[\Override]
     protected function slug(): string
     {
