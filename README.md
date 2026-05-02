@@ -35,51 +35,208 @@ TronGrid API service has the features of low latency, high consistency, high ava
 
 ### Installation
 Install the package via Composer:
-``` php
+``` bash
 composer require just-Luka/php-tron
 ```
 
-### Usage
+### Setup
 
-Initialize the Client (Mainnet)
+Initialize the client (Mainnet):
 ``` php
 use Trx\TrxClient;
 
-$tron = new TronClient('API-KEY');
+$tron = new TrxClient(apiKey: 'YOUR-API-KEY');
 ```
 
-Initialize the Client (Shasta Testnet)
+Initialize the client (Shasta Testnet):
 ``` php
 use Trx\TrxClient;
 
-$tron = new TronClient(testmode: true);
+$tron = new TrxClient(apiKey: 'YOUR-API-KEY', testMode: true);
 ```
 
-### Example
+---
 
-Generate TRON address
+### Wallet
+
+Generate a single TRON address:
 ``` php
 $wallet = $tron->wallet()->create();
 
-echo $wallet->getAddress();
-echo $wallet->getPrivateKey();
+echo $wallet->getAddress();    // T...
+echo $wallet->getPrivateKey(); // 64-char hex
 ```
 
-TRON balance
+Generate multiple addresses at once:
+``` php
+$wallets = $tron->wallet()->createMultiple(5);
+
+foreach ($wallets as $wallet) {
+    echo $wallet->getAddress();
+}
+```
+
+---
+
+### Account
+
+Fetch account info and balance:
+``` php
+$account = $tron->account('TDrbCtdTj5KMo67mtQw2XXu5eTqwwVYoKz')->explore();
+
+echo $account->balance;             // SUN (1 TRX = 1,000,000 SUN)
+echo $account->address;
+echo $account->createTime;
+echo $account->netWindowSize;
+echo $account->ownerPermissionThreshold;
+echo $account->activePermissionThreshold;
+
+// Energy & bandwidth resources
+echo $account->resource->energyWindowSize;
+echo $account->resource->energyUsage;
+echo $account->resource->energyWindowOptimized;
+
+// TRC20 token balances  [ ['token_contract_address' => balance], ... ]
+var_dump($account->trc20);
+```
+
+Fetch TRX transfer blocks for an account:
+``` php
+$blocks = $tron->account('TDrbCtdTj5KMo67mtQw2XXu5eTqwwVYoKz')->blocks();
+
+foreach ($blocks as $block) {
+    echo $block->txID;
+    echo $block->blockNumber;
+    echo $block->blockTimestamp;
+    echo $block->contractBalance;
+    echo $block->contractOwnerAddress;
+    echo $block->contractReceiverAddress;
+    echo $block->netFee;
+    echo $block->energyFee;
+}
+```
+
+Fetch TRC20 transactions for an account:
+``` php
+$transactions = $tron->account('TDrbCtdTj5KMo67mtQw2XXu5eTqwwVYoKz')->transactions();
+
+foreach ($transactions as $tx) {
+    echo $tx->transactionId;
+    echo $tx->from;
+    echo $tx->to;
+    echo $tx->value;
+    echo $tx->blockTimestamp;
+    echo $tx->type;
+
+    // Token info
+    echo $tx->tokenInfo->symbol;
+    echo $tx->tokenInfo->name;
+    echo $tx->tokenInfo->decimals;
+    echo $tx->tokenInfo->address;
+}
+```
+
+---
+
+### Contract
+
+Fetch transactions for a contract address:
+``` php
+$contract = $tron->contract('TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t');
+
+$blocks = $contract->blocks();
+$tokens = $contract->tokens();
+```
+
+---
+
+### Assets
+
+``` php
+$asset = $tron->asset();
+
+$all     = $asset->all();               // all assets
+$byName  = $asset->byName('BitTorrent'); // by name (may return multiple)
+$byId    = $asset->byId(1000001);        // by ID or owner address
+```
+
+Each `Asset` object contains:
+``` php
+$asset->id;
+$asset->name;
+$asset->abbr;
+$asset->description;
+$asset->url;
+$asset->totalSupply;
+$asset->precision;
+$asset->ownerAddress;
+$asset->startTime;
+$asset->endTime;
+```
+
+---
+
+### Filters
+
+Filters can be chained on `account()` and `contract()` calls before executing a query.  
+Calling the same filter twice overwrites the previous value.
+
+| Method | Parameter | Description |
+|--------|-----------|-------------|
+| `filterOnlyConfirmed()` | — | Return only confirmed transactions. Cannot be combined with `filterOnlyUnconfirmed()`. |
+| `filterOnlyUnconfirmed()` | — | Return only unconfirmed transactions. Cannot be combined with `filterOnlyConfirmed()`. |
+| `filterLimit(int)` | `1–200` (default `20`) | Number of results per page. |
+| `filterFingerprint(string)` | fingerprint from previous response | Pagination cursor. Other filters must remain the same across pages. |
+| `filterOrderBy(string)` | `block_timestamp,asc` \| `block_timestamp,desc` | Sort order (default `desc`). |
+| `filterMinTimestamp(string)` | Unix ms timestamp | Return results after this timestamp. |
+| `filterMaxTimestamp(string)` | Unix ms timestamp | Return results before this timestamp. |
+| `filterContractAddress(string)` | Base58 or hex address | Filter by a specific token contract. |
+| `filterOnlyTo()` | — | Only transactions **to** this address. |
+| `filterOnlyFrom()` | — | Only transactions **from** this address. |
+
+Example — paginate confirmed USDT transfers in a time window:
 ``` php
 $account = $tron->account('TDrbCtdTj5KMo67mtQw2XXu5eTqwwVYoKz');
 
-echo $account->explore()->balance;
+$transactions = $account
+    ->filterOnlyConfirmed()
+    ->filterLimit(50)
+    ->filterContractAddress('TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t') // USDT
+    ->filterMinTimestamp('1700000000000')
+    ->filterMaxTimestamp('1710000000000')
+    ->filterOrderBy('block_timestamp,asc')
+    ->transactions();
 ```
 
-Transactions
+Fetch the next page using the fingerprint from the last result:
 ``` php
-$account = $tron->account('TDrbCtdTj5KMo67mtQw2XXu5eTqwwVYoKz');
-
-$transactions = $account->transactions();
-# Or
-$transactions = $account->filterLimit(10)->filterOnlyConfirmed()->transactions(); # Apply filters
-
-var_dump($transactions);
+$lastTx      = end($transactions);
+$nextPage    = $account
+    ->filterOnlyConfirmed()
+    ->filterLimit(50)
+    ->filterFingerprint($lastTx->transactionId)
+    ->transactions();
 ```
 
+---
+
+### Error Handling
+
+``` php
+use Trx\Domain\Exceptions\ApiRequestException;
+use Trx\Domain\Exceptions\InvalidTronAddressException;
+
+try {
+    $account = $tron->account('invalid-address');
+} catch (InvalidTronAddressException $e) {
+    // Thrown immediately when the address format is invalid (no API call made)
+}
+
+try {
+    $result = $tron->account('TDrbCtdTj5KMo67mtQw2XXu5eTqwwVYoKz')->explore();
+    // Returns null if the account does not exist on-chain
+} catch (ApiRequestException $e) {
+    // Thrown on non-200 API responses or network failures
+    echo $e->getMessage();
+}
+```
